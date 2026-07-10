@@ -20,7 +20,10 @@ const serviceOptions = [
 ];
 
 const inputClass =
-  "w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200";
+  "w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink placeholder-ink-soft/60 focus:border-ink focus:outline-none focus:ring-2 focus:ring-periwinkle";
+
+const labelClass =
+  "mb-1.5 block text-xs font-semibold uppercase tracking-wider text-ink";
 
 export default function BookingForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -58,19 +61,31 @@ export default function BookingForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-accent-200 bg-accent-50 p-8 text-center">
-        <p className="text-4xl">✅</p>
-        <h2 className="mt-3 text-xl font-bold text-accent-900">
+      <div className="rounded-3xl bg-ink p-10 text-center text-white">
+        <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-periwinkle text-ink">
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 13l4 4L19 7" />
+          </svg>
+        </span>
+        <h2 className="mt-5 font-display text-2xl font-extrabold uppercase tracking-tight">
           Tak for din forespørgsel!
         </h2>
-        <p className="mt-2 text-sm text-accent-800">
+        <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-cream/75">
           Vi har modtaget din booking og kontakter dig hurtigst muligt – typisk
           inden for 24 timer.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-5 text-sm font-semibold text-brand-700 hover:underline"
+          className="mt-6 text-sm font-bold text-periwinkle underline underline-offset-4"
         >
           Send en ny forespørgsel
         </button>
@@ -82,13 +97,13 @@ export default function BookingForm() {
     <form onSubmit={handleSubmit} className="space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-semibold text-slate-700">
+          <label htmlFor="name" className={labelClass}>
             Navn *
           </label>
           <input id="name" name="name" required maxLength={200} placeholder="Dit fulde navn" className={inputClass} />
         </div>
         <div>
-          <label htmlFor="phone" className="mb-1.5 block text-sm font-semibold text-slate-700">
+          <label htmlFor="phone" className={labelClass}>
             Telefon *
           </label>
           <input id="phone" name="phone" type="tel" required maxLength={30} placeholder="12 34 56 78" className={inputClass} />
@@ -97,13 +112,13 @@ export default function BookingForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="email" className="mb-1.5 block text-sm font-semibold text-slate-700">
+          <label htmlFor="email" className={labelClass}>
             E-mail *
           </label>
           <input id="email" name="email" type="email" required maxLength={200} placeholder="din@mail.dk" className={inputClass} />
         </div>
         <div>
-          <label htmlFor="address" className="mb-1.5 block text-sm font-semibold text-slate-700">
+          <label htmlFor="address" className={labelClass}>
             Adresse (hvor bilen holder) *
           </label>
           <input id="address" name="address" required maxLength={300} placeholder="Vejnavn 1, 5000 Odense" className={inputClass} />
@@ -112,7 +127,7 @@ export default function BookingForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="car_size" className="mb-1.5 block text-sm font-semibold text-slate-700">
+          <label htmlFor="car_size" className={labelClass}>
             Bilstørrelse *
           </label>
           <select id="car_size" name="car_size" required defaultValue="" className={inputClass}>
@@ -127,7 +142,7 @@ export default function BookingForm() {
           </select>
         </div>
         <div>
-          <label htmlFor="service" className="mb-1.5 block text-sm font-semibold text-slate-700">
+          <label htmlFor="service" className={labelClass}>
             Ønsket ydelse *
           </label>
           <select id="service" name="service" required defaultValue="" className={inputClass}>
@@ -144,7 +159,7 @@ export default function BookingForm() {
       </div>
 
       <div>
-        <label htmlFor="comment" className="mb-1.5 block text-sm font-semibold text-slate-700">
+        <label htmlFor="comment" className={labelClass}>
           Kommentar
         </label>
         <textarea
@@ -158,7 +173,7 @@ export default function BookingForm() {
       </div>
 
       {status === "error" && (
-        <p className="rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+        <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
           {errorMessage}
         </p>
       )}
@@ -166,11 +181,11 @@ export default function BookingForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full rounded-full bg-accent-600 px-8 py-4 text-base font-bold text-white shadow-md transition-colors hover:bg-accent-700 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full rounded-full bg-ink px-8 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-ink/85 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "sending" ? "Sender..." : "Send booking-forespørgsel"}
       </button>
-      <p className="text-center text-xs text-slate-500">
+      <p className="text-center text-xs text-ink-soft">
         Forespørgslen er uforpligtende. Vi kontakter dig for at aftale tid og
         endelig pris.
       </p>

@@ -17,21 +17,21 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-line bg-cream/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
-          className="flex items-center gap-2"
+          className="flex items-center gap-2.5"
           onClick={() => setOpen(false)}
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-brand-600 to-accent-500 text-sm font-bold text-white">
-            FM
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-ink text-base text-periwinkle">
+            ✦
           </span>
           <span className="leading-tight">
-            <span className="block text-sm font-bold text-brand-900">
+            <span className="block font-display text-sm font-bold tracking-tight text-ink">
               Fynboens Mobil Klargøring
             </span>
-            <span className="block text-xs text-slate-500">
+            <span className="block text-xs text-ink-soft">
               Mobil bilrens på Fyn
             </span>
           </span>
@@ -42,8 +42,8 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-brand-600 ${
-                pathname === link.href ? "text-brand-600" : "text-slate-600"
+              className={`text-sm font-medium transition-colors hover:text-ink ${
+                pathname === link.href ? "text-ink underline underline-offset-4" : "text-ink-soft"
               }`}
             >
               {link.label}
@@ -51,9 +51,9 @@ export default function Header() {
           ))}
           <Link
             href="/kontakt"
-            className="rounded-full bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-accent-700"
+            className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-ink/85"
           >
-            Book nu
+            Book klargøring
           </Link>
         </nav>
 
@@ -62,7 +62,7 @@ export default function Header() {
           aria-label={open ? "Luk menu" : "Åbn menu"}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className="flex h-10 w-10 items-center justify-center rounded-md text-slate-700 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-md text-ink md:hidden"
         >
           <svg
             className="h-6 w-6"
@@ -81,14 +81,14 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="border-t border-slate-100 bg-white px-4 pb-4 md:hidden">
+        <nav className="border-t border-line bg-cream px-4 pb-4 md:hidden">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className={`block border-b border-slate-50 py-3 text-sm font-medium ${
-                pathname === link.href ? "text-brand-600" : "text-slate-700"
+              className={`block border-b border-line/60 py-3 text-sm font-medium ${
+                pathname === link.href ? "text-ink" : "text-ink-soft"
               }`}
             >
               {link.label}
@@ -97,9 +97,9 @@ export default function Header() {
           <Link
             href="/kontakt"
             onClick={() => setOpen(false)}
-            className="mt-4 block rounded-full bg-accent-600 px-5 py-3 text-center text-sm font-semibold text-white"
+            className="mt-4 block rounded-full bg-ink px-5 py-3 text-center text-sm font-semibold text-white"
           >
-            Book nu
+            Book klargøring
           </Link>
         </nav>
       )}

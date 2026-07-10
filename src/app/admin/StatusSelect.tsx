@@ -5,9 +5,9 @@ import type { BookingStatus } from "@/lib/supabase";
 import { updateBookingStatus } from "./actions";
 
 const styles: Record<BookingStatus, string> = {
-  ny: "bg-amber-100 text-amber-800 border-amber-300",
-  kontaktet: "bg-brand-100 text-brand-800 border-brand-300",
-  afsluttet: "bg-accent-100 text-accent-800 border-accent-300",
+  ny: "bg-periwinkle text-ink border-periwinkle-deep",
+  kontaktet: "bg-sand text-ink border-line",
+  afsluttet: "bg-ink text-white border-ink",
 };
 
 export default function StatusSelect({
@@ -38,7 +38,7 @@ export default function StatusSelect({
       value={current}
       disabled={isPending}
       onChange={(e) => handleChange(e.target.value as BookingStatus)}
-      className={`rounded-full border px-3 py-1.5 text-xs font-semibold ${styles[current]} ${
+      className={`rounded-full border px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider ${styles[current]} ${
         isPending ? "opacity-50" : ""
       }`}
     >

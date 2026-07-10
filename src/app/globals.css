@@ -1,7 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brandfarver — blå/grøn palette der matcher logoet */
+  /* Ny palette — varm beige / navy / støvet pastelblå */
+  --color-cream: #f6f0e8; /* hovedbaggrund */
+  --color-sand: #efe7de; /* kort og sektioner */
+  --color-paper: #fbf8f3; /* meget lys flade */
+  --color-ink: #101a2c; /* overskrifter og primær tekst */
+  --color-ink-soft: #5f6270; /* sekundær tekst */
+  --color-periwinkle: #b8c9f5; /* accent */
+  --color-periwinkle-deep: #a7baee; /* accent hover */
+  --color-line: #e4dcd2; /* kanter */
+
+  /* Gammel palette — bruges stadig af undersiderne, indtil de også redesignes */
   --color-brand-50: #eff8ff;
   --color-brand-100: #daefff;
   --color-brand-200: #bde4ff;
@@ -28,6 +38,8 @@
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
 }
 
 html {
@@ -35,5 +47,5 @@ html {
 }
 
 body {
-  @apply bg-white text-slate-800 antialiased;
+  @apply bg-cream text-ink antialiased;
 }
