@@ -50,7 +50,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/kontakt"
+            href="/kontakt#booking"
             className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-ink/85"
           >
             Book klargøring
@@ -95,7 +95,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/kontakt"
+            href="/kontakt#booking"
             onClick={() => setOpen(false)}
             className="mt-4 block rounded-full bg-ink px-5 py-3 text-center text-sm font-semibold text-white"
           >

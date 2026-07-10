@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import BookingForm from "@/components/BookingForm";
+import CalBookingInline from "@/components/CalBookingInline";
 
 export const metadata: Metadata = {
   title: "Book & kontakt",
   description:
-    "Book mobil bilrens på Fyn. Udfyld formularen, så kontakter vi dig inden for 24 timer og aftaler tid og sted.",
+    "Book mobil bilrens på Fyn. Vælg en ledig tid direkte i kalenderen – vi kommer til dig med alt udstyr.",
 };
 
 export default function KontaktPage() {
@@ -14,14 +14,12 @@ export default function KontaktPage() {
       <PageHero
         eyebrow="Book & kontakt"
         title="Book din tid – vi kommer til dig"
-        text="Udfyld formularen, så ringer eller skriver vi til dig inden for 24 timer og aftaler det hele."
+        text="Vælg en ledig tid, udfyld oplysningerne om bilen og adressen, så modtager du en bekræftelse på din booking."
       />
 
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
-          <div className="rounded-3xl bg-white p-6 sm:p-10">
-            <BookingForm />
-          </div>
+          <CalBookingInline />
 
           <aside className="space-y-4">
             <div className="rounded-3xl bg-ink p-8 text-white">
@@ -54,20 +52,21 @@ export default function KontaktPage() {
                   <span className="font-display text-xl font-extrabold text-periwinkle-deep">
                     01
                   </span>
-                  Vi modtager din forespørgsel med det samme.
+                  Du vælger en ledig tid og udfylder oplysningerne om bilen og
+                  adressen.
                 </li>
                 <li className="flex gap-4">
                   <span className="font-display text-xl font-extrabold text-periwinkle-deep">
                     02
                   </span>
-                  Vi kontakter dig inden for 24 timer og aftaler tid, sted og
-                  endelig pris.
+                  Du modtager en bekræftelse på din booking via e-mail.
                 </li>
                 <li className="flex gap-4">
                   <span className="font-display text-xl font-extrabold text-periwinkle-deep">
                     03
                   </span>
-                  Vi kommer til dig med alt udstyr og gør bilen som ny.
+                  Vi kommer til den angivne adresse med alt nødvendigt udstyr
+                  og udfører klargøringen.
                 </li>
               </ol>
             </div>
