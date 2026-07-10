@@ -42,7 +42,7 @@ export default function OmOsPage() {
     <div className="bg-cream">
       <PageHero
         eyebrow="Om os"
-        title="Din lokale bilplejespecialist på Fyn"
+        title={"Din lokale bilpleje­specialist på Fyn"}
         text="Fynboens Mobil Klargøring er bygget på en simpel idé: professionel bilpleje skal være nemt – derfor kommer vi til dig."
         buttonLabel="Book din tid"
       />

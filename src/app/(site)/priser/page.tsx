@@ -45,7 +45,7 @@ export default function PriserPage() {
     <div className="bg-cream">
       <PageHero
         eyebrow="Priser"
-        title="Gennemskuelige priser – ingen overraskelser"
+        title={"Gennem­skuelige priser – ingen over­raskelser"}
         text="Prisen afhænger kun af bilens størrelse og den ydelse, du vælger. Kørsel på Fyn er inkluderet."
         buttonLabel="Book din tid"
       />
@@ -71,7 +71,50 @@ export default function PriserPage() {
             eyebrow="Sammenligning"
             title="Hvad er med i pakken?"
           />
-          <div className="mt-12 overflow-x-auto rounded-3xl bg-white p-2 sm:p-6">
+          {/* Mobil: ét kort pr. pakke */}
+          <div className="mt-12 space-y-4 md:hidden">
+            {packageNames.map((name, i) => (
+              <div
+                key={name}
+                className={`rounded-3xl p-6 ${
+                  i === 1 ? "bg-ink text-white" : "bg-white text-ink"
+                }`}
+              >
+                <h3 className="font-display text-lg font-bold tracking-tight">
+                  {name}
+                </h3>
+                <ul className="mt-4 space-y-2.5">
+                  {comparison.map((row) => (
+                    <li key={row.feature} className="flex items-start gap-2.5 text-sm">
+                      {row.included[i] ? (
+                        <span className={`mt-0.5 shrink-0 ${i === 1 ? "text-periwinkle" : "text-ink"}`}>
+                          <CheckIcon className="h-4 w-4" />
+                        </span>
+                      ) : (
+                        <span className={`w-4 shrink-0 text-center ${i === 1 ? "text-white/25" : "text-ink/20"}`}>
+                          —
+                        </span>
+                      )}
+                      <span
+                        className={
+                          row.included[i]
+                            ? ""
+                            : i === 1
+                              ? "text-white/40"
+                              : "text-ink/40"
+                        }
+                      >
+                        {row.feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Tablet/desktop: sammenligningstabel */}
+          <div className="mt-12 hidden overflow-x-auto rounded-3xl bg-white p-2 sm:p-6 md:block">
             <table className="w-full min-w-[560px] text-sm">
               <thead>
                 <tr>
@@ -132,7 +175,29 @@ export default function PriserPage() {
           title="Pris efter bilens størrelse"
           description="Alle priser er inkl. moms og kørsel på Fyn."
         />
-        <div className="mt-12 overflow-x-auto rounded-3xl bg-white p-2 sm:p-6">
+        {/* Mobil: ét kort pr. bilstørrelse */}
+        <div className="mt-12 space-y-4 md:hidden">
+          {sizePrices.map((row) => (
+            <div key={row.size} className="rounded-3xl bg-white p-6">
+              <h3 className="font-display text-base font-bold tracking-tight text-ink">
+                {row.size}
+              </h3>
+              <dl className="mt-4 space-y-2.5">
+                {packageNames.map((name, i) => (
+                  <div key={name} className="flex items-center justify-between gap-4 text-sm">
+                    <dt className="text-ink-soft">{name}</dt>
+                    <dd className="font-display font-extrabold tracking-tight text-ink">
+                      {row.prices[i]}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+        </div>
+
+        {/* Tablet/desktop: pristabel */}
+        <div className="mt-12 hidden overflow-x-auto rounded-3xl bg-white p-2 sm:p-6 md:block">
           <table className="w-full min-w-[560px] text-sm">
             <thead>
               <tr>

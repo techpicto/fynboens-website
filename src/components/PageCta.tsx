@@ -12,7 +12,7 @@ export default function PageCta({
   return (
     <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <div className="rounded-3xl bg-ink px-6 py-16 text-center text-white sm:py-20">
-        <h2 className="mx-auto max-w-2xl font-display text-3xl font-extrabold uppercase leading-[0.98] tracking-tight sm:text-5xl">
+        <h2 className="mx-auto max-w-2xl break-words font-display text-3xl font-extrabold uppercase leading-[0.98] tracking-tight hyphens-auto sm:text-5xl">
           {title}
         </h2>
         <p className="mx-auto mt-4 max-w-md text-cream/75">{text}</p>

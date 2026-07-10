@@ -43,7 +43,7 @@ export default function Footer() {
             <li>
               <a
                 href="mailto:kontakt@fynboensmobilklargoering.dk"
-                className="hover:text-periwinkle"
+                className="break-all hover:text-periwinkle"
               >
                 kontakt@fynboensmobilklargoering.dk
               </a>

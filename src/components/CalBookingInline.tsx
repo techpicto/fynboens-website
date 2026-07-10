@@ -25,14 +25,13 @@ export default function CalBookingInline() {
   return (
     <div
       id="booking"
-      className="w-full scroll-mt-24 overflow-hidden rounded-3xl bg-white p-2 sm:p-4"
+      className="min-h-[520px] w-full scroll-mt-24 overflow-hidden rounded-3xl bg-white p-2 sm:p-4 md:min-h-[680px] lg:min-h-[780px]"
     >
       <Cal
         namespace="mobil-bilklargoering"
         calLink="torpal-xt9cqn/mobil-bilklargøring"
         style={{
           width: "100%",
-          minHeight: "850px",
         }}
         config={{
           layout: "month_view",

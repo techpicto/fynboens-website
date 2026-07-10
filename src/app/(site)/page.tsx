@@ -78,7 +78,7 @@ export default function Home() {
               <p className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-periwinkle">
                 Mobil bilrens & damprens på Fyn
               </p>
-              <h1 className="mt-6 font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight sm:text-6xl">
+              <h1 className="mt-6 break-words font-display text-4xl font-extrabold uppercase leading-[0.98] tracking-tight hyphens-auto sm:text-6xl">
                 Bilpleje til travle fynboer
               </h1>
               <p className="mt-5 max-w-md text-base leading-relaxed text-cream/75">
@@ -244,7 +244,7 @@ export default function Home() {
             <SectionHeader
               dark
               eyebrow="Til virksomheder"
-              title="Rene firmabiler uden besvær"
+              title={"Rene firma­biler uden besvær"}
               description="Firmabilen er jeres visitkort på vejen. Vi tilbyder faste aftaler til håndværkere, sælgere, bilforhandlere og flåder – vi kommer på jeres adresse og fakturerer samlet."
             />
             <div>

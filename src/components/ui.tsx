@@ -69,7 +69,7 @@ export function SectionHeader({
     <div className={center ? "text-center" : ""}>
       <Eyebrow light={dark}>{eyebrow}</Eyebrow>
       <h2
-        className={`mt-2 max-w-2xl font-display text-3xl font-extrabold uppercase leading-[0.98] tracking-tight sm:text-5xl ${
+        className={`mt-2 max-w-2xl break-words font-display text-3xl font-extrabold uppercase leading-[0.98] tracking-tight hyphens-auto sm:text-5xl ${
           dark ? "text-white" : "text-ink"
         } ${center ? "mx-auto" : ""}`}
       >

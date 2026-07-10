@@ -22,7 +22,7 @@ export default function PageHero({
         <p className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-periwinkle">
           {eyebrow}
         </p>
-        <h1 className="mt-6 max-w-2xl font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight sm:text-6xl">
+        <h1 className="mt-6 max-w-2xl break-words font-display text-3xl font-extrabold uppercase leading-[0.98] tracking-tight hyphens-auto sm:text-5xl lg:text-6xl">
           {title}
         </h1>
         <p className="mt-5 max-w-xl leading-relaxed text-cream/75">{text}</p>

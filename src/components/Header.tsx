@@ -21,23 +21,23 @@ export default function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
-          className="flex items-center gap-2.5"
+          className="flex min-w-0 items-center gap-2.5"
           onClick={() => setOpen(false)}
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-ink text-base text-periwinkle">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-ink text-base text-periwinkle">
             ✦
           </span>
-          <span className="leading-tight">
-            <span className="block font-display text-sm font-bold tracking-tight text-ink">
+          <span className="min-w-0 leading-tight">
+            <span className="block truncate font-display text-sm font-bold tracking-tight text-ink">
               Fynboens Mobil Klargøring
             </span>
-            <span className="block text-xs text-ink-soft">
+            <span className="block truncate text-xs text-ink-soft">
               Mobil bilrens på Fyn
             </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -62,7 +62,7 @@ export default function Header() {
           aria-label={open ? "Luk menu" : "Åbn menu"}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className="flex h-10 w-10 items-center justify-center rounded-md text-ink md:hidden"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md text-ink lg:hidden"
         >
           <svg
             className="h-6 w-6"
@@ -81,7 +81,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="border-t border-line bg-cream px-4 pb-4 md:hidden">
+        <nav className="border-t border-line bg-cream px-4 pb-4 lg:hidden">
           {links.map((link) => (
             <Link
               key={link.href}
