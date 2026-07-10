@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brandfarver — blå/grøn palette der matcher logoet */
+  --color-brand-50: #eff8ff;
+  --color-brand-100: #daefff;
+  --color-brand-200: #bde4ff;
+  --color-brand-300: #90d3ff;
+  --color-brand-400: #5bb9fc;
+  --color-brand-500: #3599f0;
+  --color-brand-600: #1f7ce0;
+  --color-brand-700: #1763c2;
+  --color-brand-800: #18519d;
+  --color-brand-900: #1a457c;
+  --color-brand-950: #142c4e;
+
+  --color-accent-50: #effef4;
+  --color-accent-100: #d9fbe5;
+  --color-accent-200: #b5f5cd;
+  --color-accent-300: #7deba9;
+  --color-accent-400: #3ed87d;
+  --color-accent-500: #17bf5c;
+  --color-accent-600: #0c9e48;
+  --color-accent-700: #0d7c3c;
+  --color-accent-800: #0f6233;
+  --color-accent-900: #0e502c;
+  --color-accent-950: #012d15;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-slate-800 antialiased;
+}
