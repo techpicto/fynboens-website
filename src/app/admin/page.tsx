@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { isLoggedIn } from "@/lib/auth";
-import { getSupabaseAdmin, type Booking } from "@/lib/supabase";
+import {
+  getSupabaseAdmin,
+  bookingStatuses,
+  bookingStatusLabels,
+  type Booking,
+  type BookingStatus,
+} from "@/lib/supabase";
 import { login, logout } from "./actions";
 import StatusSelect from "./StatusSelect";
 
@@ -61,7 +68,7 @@ function LoginForm({ showError }: { showError: boolean }) {
 export default async function AdminPage({
   searchParams,
 }: {
-  searchParams: Promise<{ fejl?: string }>;
+  searchParams: Promise<{ fejl?: string; status?: string }>;
 }) {
   const params = await searchParams;
 
@@ -75,12 +82,17 @@ export default async function AdminPage({
     .select("*")
     .order("created_at", { ascending: false });
 
-  const bookings = (data ?? []) as Booking[];
-  const counts = {
-    ny: bookings.filter((b) => b.status === "ny").length,
-    kontaktet: bookings.filter((b) => b.status === "kontaktet").length,
-    afsluttet: bookings.filter((b) => b.status === "afsluttet").length,
-  };
+  const allBookings = (data ?? []) as Booking[];
+  const counts = Object.fromEntries(
+    bookingStatuses.map((s) => [s, allBookings.filter((b) => b.status === s).length])
+  ) as Record<BookingStatus, number>;
+
+  const activeFilter = bookingStatuses.includes(params.status as BookingStatus)
+    ? (params.status as BookingStatus)
+    : null;
+  const bookings = activeFilter
+    ? allBookings.filter((b) => b.status === activeFilter)
+    : allBookings;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
@@ -90,8 +102,7 @@ export default async function AdminPage({
             Booking-forespørgsler
           </h1>
           <p className="mt-1 text-sm text-ink-soft">
-            {bookings.length} i alt · {counts.ny} nye · {counts.kontaktet}{" "}
-            kontaktet · {counts.afsluttet} afsluttet
+            {allBookings.length} i alt
           </p>
         </div>
         <form action={logout}>
@@ -104,6 +115,33 @@ export default async function AdminPage({
         </form>
       </div>
 
+      {/* Statusfilter */}
+      <div className="mt-6 flex flex-wrap gap-2">
+        <Link
+          href="/admin"
+          className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors ${
+            activeFilter === null
+              ? "border-ink bg-ink text-white"
+              : "border-line bg-white text-ink-soft hover:border-ink/40"
+          }`}
+        >
+          Alle · {allBookings.length}
+        </Link>
+        {bookingStatuses.map((s) => (
+          <Link
+            key={s}
+            href={`/admin?status=${s}`}
+            className={`rounded-full border px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors ${
+              activeFilter === s
+                ? "border-ink bg-ink text-white"
+                : "border-line bg-white text-ink-soft hover:border-ink/40"
+            }`}
+          >
+            {bookingStatusLabels[s]} · {counts[s]}
+          </Link>
+        ))}
+      </div>
+
       {error && (
         <p className="mt-8 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
           Kunne ikke hente bookinger: {error.message}
@@ -112,8 +150,9 @@ export default async function AdminPage({
 
       {!error && bookings.length === 0 && (
         <p className="mt-12 rounded-3xl border border-dashed border-line bg-paper p-12 text-center text-ink-soft">
-          Ingen forespørgsler endnu. De dukker op her, når nogen udfylder
-          formularen på hjemmesiden.
+          {activeFilter
+            ? "Ingen forespørgsler med denne status."
+            : "Ingen forespørgsler endnu. De dukker op her, når nogen udfylder formularen på hjemmesiden."}
         </p>
       )}
 

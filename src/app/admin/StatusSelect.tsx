@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import type { BookingStatus } from "@/lib/supabase";
+import { bookingStatuses, bookingStatusLabels, type BookingStatus } from "@/lib/supabase";
 import { updateBookingStatus } from "./actions";
 
 const styles: Record<BookingStatus, string> = {
   ny: "bg-periwinkle text-ink border-periwinkle-deep",
   kontaktet: "bg-sand text-ink border-line",
+  booket: "bg-periwinkle-deep text-ink border-periwinkle-deep",
   afsluttet: "bg-ink text-white border-ink",
+  annulleret: "bg-white text-ink-soft border-line line-through",
 };
 
 export default function StatusSelect({
@@ -42,9 +44,11 @@ export default function StatusSelect({
         isPending ? "opacity-50" : ""
       }`}
     >
-      <option value="ny">Ny</option>
-      <option value="kontaktet">Kontaktet</option>
-      <option value="afsluttet">Afsluttet</option>
+      {bookingStatuses.map((s) => (
+        <option key={s} value={s}>
+          {bookingStatusLabels[s]}
+        </option>
+      ))}
     </select>
   );
 }

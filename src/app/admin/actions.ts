@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createSession, destroySession, isLoggedIn, verifyPassword } from "@/lib/auth";
-import { getSupabaseAdmin, type BookingStatus } from "@/lib/supabase";
+import { getSupabaseAdmin, bookingStatuses, type BookingStatus } from "@/lib/supabase";
 
 export async function login(formData: FormData) {
   const password = String(formData.get("password") ?? "");
@@ -21,13 +21,11 @@ export async function logout() {
   redirect("/admin");
 }
 
-const validStatuses: BookingStatus[] = ["ny", "kontaktet", "afsluttet"];
-
 export async function updateBookingStatus(id: string, status: string) {
   if (!(await isLoggedIn())) {
     throw new Error("Ikke logget ind");
   }
-  if (!validStatuses.includes(status as BookingStatus)) {
+  if (!bookingStatuses.includes(status as BookingStatus)) {
     throw new Error("Ugyldig status");
   }
 

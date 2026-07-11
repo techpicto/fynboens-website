@@ -26,6 +26,7 @@ export default function Footer() {
             <li><Link href="/foer-efter" className="hover:text-periwinkle">Før & efter</Link></li>
             <li><Link href="/om-os" className="hover:text-periwinkle">Om os</Link></li>
             <li><Link href="/kontakt" className="hover:text-periwinkle">Book & kontakt</Link></li>
+            <li><Link href="/vilkaar" className="hover:text-periwinkle">Vilkår & betingelser</Link></li>
           </ul>
         </div>
 
@@ -35,6 +36,8 @@ export default function Footer() {
           </p>
           <ul className="mt-3 space-y-2 text-sm">
             <li>Hele Fyn og omegn</li>
+            <li>Adresse: [udfyldes], 5000 Odense</li>
+            <li>CVR: 00 00 00 00</li>
             <li>
               <a href="tel:+4500000000" className="hover:text-periwinkle">
                 Tlf: 00 00 00 00
@@ -48,6 +51,7 @@ export default function Footer() {
                 kontakt@fynboensmobilklargoering.dk
               </a>
             </li>
+            <li className="pt-1 text-cream/50">Åbningstider: Hverdage 8-18</li>
           </ul>
         </div>
       </div>

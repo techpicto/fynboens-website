@@ -4,10 +4,12 @@ export default function PageCta({
   title = "Klar til at komme i gang?",
   text = "Book online i dag – vi kommer til dig overalt på Fyn.",
   buttonLabel = "Book din tid nu",
+  showContact = false,
 }: {
   title?: string;
   text?: string;
   buttonLabel?: string;
+  showContact?: boolean;
 }) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
@@ -19,6 +21,19 @@ export default function PageCta({
         <Button href="/kontakt" variant="pastel" className="mt-8 px-10 py-4">
           {buttonLabel}
         </Button>
+        {showContact && (
+          <div className="mt-8 flex flex-col items-center gap-1 text-sm text-cream/75">
+            <a href="tel:+4500000000" className="font-semibold text-white hover:text-periwinkle">
+              Tlf: 00 00 00 00
+            </a>
+            <a
+              href="mailto:kontakt@fynboensmobilklargoering.dk"
+              className="break-all hover:text-periwinkle"
+            >
+              kontakt@fynboensmobilklargoering.dk
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );

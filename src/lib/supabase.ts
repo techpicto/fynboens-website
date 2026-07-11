@@ -1,6 +1,27 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-export type BookingStatus = "ny" | "kontaktet" | "afsluttet";
+export type BookingStatus =
+  | "ny"
+  | "kontaktet"
+  | "booket"
+  | "afsluttet"
+  | "annulleret";
+
+export const bookingStatuses: BookingStatus[] = [
+  "ny",
+  "kontaktet",
+  "booket",
+  "afsluttet",
+  "annulleret",
+];
+
+export const bookingStatusLabels: Record<BookingStatus, string> = {
+  ny: "Ny",
+  kontaktet: "Kontaktet",
+  booket: "Booket",
+  afsluttet: "Afsluttet",
+  annulleret: "Annulleret",
+};
 
 export type Booking = {
   id: string;

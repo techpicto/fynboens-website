@@ -3,41 +3,20 @@
 
 export const steps = [
   {
-    title: "Book online",
-    text: "Udfyld formularen med bilstørrelse og ønsket ydelse – det tager 2 minutter.",
+    title: "Du vælger en tid",
+    text: "Book en ledig tid direkte i kalenderen med bilstørrelse og ønsket pakke – det tager 2 minutter.",
   },
   {
-    title: "Vi bekræfter",
-    text: "Vi ringer eller skriver til dig og aftaler tid og sted, der passer dig.",
+    title: "Du får bekræftelse med det samme",
+    text: "Du modtager straks en bekræftelse på din booking via e-mail.",
   },
   {
-    title: "Vi kommer til dig",
-    text: "Vi møder op med alt udstyr – vand, strøm og professionelle midler.",
+    title: "Vi kommer og renser bilen",
+    text: "Vi møder op på den aftalte adresse med alt udstyr – vand, strøm og professionelle midler.",
   },
   {
-    title: "Bilen står som ny",
-    text: "Du godkender resultatet på stedet og betaler nemt med MobilePay eller faktura.",
-  },
-];
-
-export const priceTeasers = [
-  {
-    name: "Udvendig vask & voks",
-    price: "599",
-    note: "Håndvask, fælgrens, hårdvoks og pudsede ruder.",
-    highlight: false,
-  },
-  {
-    name: "Indvendig damprens",
-    price: "899",
-    note: "Dybderens af sæder, måtter, loft og paneler – inkl. lugtneutralisering.",
-    highlight: true,
-  },
-  {
-    name: "Komplet klargøring",
-    price: "1.799",
-    note: "Alt indvendigt og udvendigt – perfekt til salg eller leasing-aflevering.",
-    highlight: false,
+    title: "Du betaler først bagefter",
+    text: "Du godkender resultatet på stedet og betaler først, når arbejdet er udført til din tilfredshed.",
   },
 ];
 

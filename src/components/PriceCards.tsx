@@ -1,44 +1,46 @@
-import { priceTeasers } from "@/lib/content";
+import { packages, getFromPrice } from "@/lib/priser";
 import { Button } from "./ui";
 
+/* Forside-teaser: viser laveste fra-pris pr. pakke (uden valgt bilstørrelse).
+   Den interaktive, bilstørrelse-specifikke vælger findes på /priser. */
 export default function PriceCards() {
   return (
     <div className="grid gap-4 md:grid-cols-3">
-      {priceTeasers.map((item) => (
+      {packages.map((pkg) => (
         <div
-          key={item.name}
+          key={pkg.id}
           className={`flex flex-col rounded-3xl p-8 ${
-            item.highlight ? "bg-ink text-white" : "bg-white text-ink"
+            pkg.highlight ? "bg-ink text-white" : "bg-white text-ink"
           }`}
         >
           <p
             className={`text-sm font-semibold ${
-              item.highlight ? "text-periwinkle" : "text-ink-soft"
+              pkg.highlight ? "text-periwinkle" : "text-ink-soft"
             }`}
           >
-            {item.name}
+            {pkg.name}
           </p>
           <p className="mt-3 font-display text-5xl font-extrabold tracking-tight">
-            {item.price}
+            {getFromPrice(pkg.id)}
             <span className="text-lg font-bold"> kr.</span>
           </p>
           <p
             className={`mt-1 text-xs uppercase tracking-wider ${
-              item.highlight ? "text-cream/60" : "text-ink-soft"
+              pkg.highlight ? "text-cream/60" : "text-ink-soft"
             }`}
           >
-            fra-pris · inkl. moms og kørsel
+            fra-pris · {pkg.tidsestimat} · inkl. moms og kørsel
           </p>
           <p
             className={`mt-4 flex-1 text-sm leading-relaxed ${
-              item.highlight ? "text-cream/75" : "text-ink-soft"
+              pkg.highlight ? "text-cream/75" : "text-ink-soft"
             }`}
           >
-            {item.note}
+            {pkg.note}
           </p>
           <Button
             href="/kontakt"
-            variant={item.highlight ? "pastel" : "dark"}
+            variant={pkg.highlight ? "pastel" : "dark"}
             className="mt-7 px-6 py-3"
           >
             Book nu

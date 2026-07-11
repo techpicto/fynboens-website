@@ -25,16 +25,26 @@ function Icon({ path }: { path: string }) {
 
 const icons = {
   van: "M3 7h11v8H3zM14 10h4l3 3v2h-7zM7.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM17.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z",
-  pin: "M12 21s-7-5.5-7-11a7 7 0 1114 0c0 5.5-7 11-7 11zM12 12a2 2 0 100-4 2 2 0 000 4z",
-  steam: "M8 3c0 2-2 2.5-2 4.5S8 10 8 12M13 3c0 2-2 2.5-2 4.5s2 2.5 2 4.5M18 3c0 2-2 2.5-2 4.5s2 2.5 2 4.5M5 16h14v2a3 3 0 01-3 3H8a3 3 0 01-3-3v-2z",
   badge: "M12 3l2.1 2.1 3-.4 1 2.8 2.8 1-.4 3L22.6 14l-2.1 2.1.4 3-2.8 1-1 2.8-3-.4L12 24l-2.1-1.5-3 .4-1-2.8-2.8-1 .4-3L1.4 14l2.1-2.1-.4-3 2.8-1 1-2.8 3 .4z",
+  coin: "M12 8v8M9 10.5c0-1 1-1.5 3-1.5s3 .8 3 1.8-1 1.5-3 1.7-3 .7-3 1.7 1 1.8 3 1.8 3-.5 3-1.5M4 12a8 8 0 1116 0 8 8 0 01-16 0z",
 };
 
 const trust = [
-  { icon: icons.van, title: "100% mobil", text: "Vi kommer til dig med alt udstyr" },
-  { icon: icons.pin, title: "Hele Fyn", text: "Odense, Svendborg, Nyborg m.fl." },
-  { icon: icons.steam, title: "Damprens", text: "Skånsom, kemikaliefri dybderens" },
-  { icon: icons.badge, title: "Tilfredshed", text: "Du godkender resultatet på stedet" },
+  {
+    icon: icons.van,
+    title: "Vi kommer til dig",
+    text: "På hele Fyn",
+  },
+  {
+    icon: icons.badge,
+    title: "Erfaring fra branchens største aktør",
+    text: "Solidt håndværk hver gang",
+  },
+  {
+    icon: icons.coin,
+    title: "Du betaler først",
+    text: "Når bilen er rengjort",
+  },
 ];
 
 const services = [
@@ -108,7 +118,7 @@ export default function Home() {
         </div>
 
         {/* Tillids-bar */}
-        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {trust.map((item) => (
             <div
               key={item.title}
@@ -305,6 +315,7 @@ export default function Home() {
       <PageCta
         title="Klar til en bil, der føles som ny?"
         text="Book i dag – så finder vi en tid, der passer dig. Vi kommer til dig overalt på Fyn."
+        showContact
       />
     </div>
   );
