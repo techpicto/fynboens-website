@@ -23,6 +23,8 @@ export const bookingStatusLabels: Record<BookingStatus, string> = {
   annulleret: "Annulleret",
 };
 
+export type CustomerType = "privat" | "erhverv";
+
 export type Booking = {
   id: string;
   created_at: string;
@@ -30,9 +32,18 @@ export type Booking = {
   phone: string;
   email: string;
   address: string;
+  postal_code: string;
+  city: string;
+  customer_type: CustomerType;
+  company_name: string | null;
+  cvr: string | null;
   car_size: string;
   service: string;
+  preferred_date: string | null;
+  earliest_start: string | null;
+  latest_end: string | null;
   comment: string | null;
+  terms_accepted: boolean;
   status: BookingStatus;
 };
 

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import CalBookingInline from "@/components/CalBookingInline";
+import BookingForm from "@/components/BookingForm";
 
 export const metadata: Metadata = {
   title: "Book & kontakt",
   description:
-    "Book mobil bilrens på Fyn. Vælg en ledig tid direkte i kalenderen – vi kommer til dig med alt udstyr.",
+    "Book mobil bilrens på Fyn. Udfyld formularen, så ringer vi til dig inden for 24 timer og bekræfter dag og tidsrum.",
 };
 
 export default function KontaktPage() {
@@ -14,12 +14,14 @@ export default function KontaktPage() {
       <PageHero
         eyebrow="Book & kontakt"
         title="Book din tid – vi kommer til dig"
-        text="Vælg en ledig tid, udfyld oplysningerne om bilen og adressen, så modtager du en bekræftelse på din booking."
+        text="Udfyld formularen, så ringer vi til dig inden for 24 timer og bekræfter dag og tidsrum."
       />
 
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
-          <CalBookingInline />
+          <div id="booking" className="scroll-mt-24 rounded-3xl bg-white p-6 sm:p-10">
+            <BookingForm />
+          </div>
 
           <aside className="space-y-4">
             <div className="rounded-3xl bg-ink p-8 text-white">
@@ -52,14 +54,14 @@ export default function KontaktPage() {
                   <span className="font-display text-xl font-extrabold text-periwinkle-deep">
                     01
                   </span>
-                  Du vælger en ledig tid og udfylder oplysningerne om bilen og
-                  adressen.
+                  Du sender din forespørgsel med ønsket dato og tidsrum.
                 </li>
                 <li className="flex gap-4">
                   <span className="font-display text-xl font-extrabold text-periwinkle-deep">
                     02
                   </span>
-                  Du modtager en bekræftelse på din booking via e-mail.
+                  Vi ringer til dig inden for 24 timer og bekræfter dag og
+                  tidspunkt.
                 </li>
                 <li className="flex gap-4">
                   <span className="font-display text-xl font-extrabold text-periwinkle-deep">

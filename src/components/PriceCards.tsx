@@ -39,7 +39,7 @@ export default function PriceCards() {
             {pkg.note}
           </p>
           <Button
-            href="/kontakt"
+            href={`/kontakt?pakke=${pkg.id}`}
             variant={pkg.highlight ? "pastel" : "dark"}
             className="mt-7 px-6 py-3"
           >

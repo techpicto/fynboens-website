@@ -165,8 +165,17 @@ export default async function AdminPage({
                   <p className="font-display text-lg font-bold tracking-tight text-ink">
                     {booking.name}
                   </p>
-                  <p className="text-xs text-ink-soft">
-                    {formatDate(booking.created_at)}
+                  <p className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-soft">
+                    <span>{formatDate(booking.created_at)}</span>
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
+                        booking.customer_type === "erhverv"
+                          ? "bg-periwinkle/30 text-ink"
+                          : "bg-sand text-ink-soft"
+                      }`}
+                    >
+                      {booking.customer_type === "erhverv" ? "Erhverv" : "Privat"}
+                    </span>
                   </p>
                 </div>
                 <StatusSelect id={booking.id} status={booking.status} />
@@ -203,8 +212,20 @@ export default async function AdminPage({
                   <dt className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
                     Adresse
                   </dt>
-                  <dd className="text-ink">{booking.address}</dd>
+                  <dd className="text-ink">
+                    {booking.address}, {booking.postal_code} {booking.city}
+                  </dd>
                 </div>
+                {booking.customer_type === "erhverv" && (
+                  <div>
+                    <dt className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
+                      Virksomhed
+                    </dt>
+                    <dd className="text-ink">
+                      {booking.company_name} · CVR {booking.cvr}
+                    </dd>
+                  </div>
+                )}
                 <div>
                   <dt className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
                     Bilstørrelse
@@ -213,9 +234,31 @@ export default async function AdminPage({
                 </div>
                 <div>
                   <dt className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
-                    Ydelse
+                    Ønsket pakke
                   </dt>
                   <dd className="text-ink">{booking.service}</dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
+                    Ønsket dato
+                  </dt>
+                  <dd className="text-ink">
+                    {booking.preferred_date
+                      ? new Date(booking.preferred_date).toLocaleDateString("da-DK", {
+                          day: "2-digit",
+                          month: "2-digit",
+                          year: "numeric",
+                        })
+                      : "—"}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-ink-soft">
+                    Tidsvindue
+                  </dt>
+                  <dd className="text-ink">
+                    {booking.earliest_start ?? "—"} – {booking.latest_end ?? "—"}
+                  </dd>
                 </div>
                 {booking.comment && (
                   <div className="sm:col-span-2 lg:col-span-3">

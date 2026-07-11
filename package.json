@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@calcom/embed-react": "^1.5.3",
     "@supabase/supabase-js": "^2.110.2",
     "next": "^15.5.20",
     "react": "^19.2.7",

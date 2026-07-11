@@ -65,7 +65,7 @@ export default function PriceSelector() {
               {pkg.note}
             </p>
             <Link
-              href="/kontakt"
+              href={`/kontakt?pakke=${pkg.id}`}
               className={`mt-7 inline-block rounded-full px-6 py-3 text-center text-sm font-bold uppercase tracking-wide transition-colors ${
                 pkg.highlight
                   ? "bg-periwinkle text-ink hover:bg-periwinkle-deep"

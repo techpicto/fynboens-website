@@ -1,14 +1,21 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/supabase";
+import { packages } from "@/lib/priser";
 
 const requiredFields = [
   "name",
   "phone",
   "email",
   "address",
+  "postal_code",
+  "city",
+  "customer_type",
   "car_size",
   "service",
+  "preferred_date",
+  "earliest_start",
+  "latest_end",
 ] as const;
 
 function escapeHtml(value: string): string {
@@ -39,10 +46,52 @@ export async function POST(request: Request) {
     values[field] = value.trim().slice(0, 500);
   }
 
+  if (values.customer_type !== "privat" && values.customer_type !== "erhverv") {
+    return NextResponse.json({ error: "Ugyldig kundetype." }, { status: 400 });
+  }
+
+  if (values.latest_end <= values.earliest_start) {
+    return NextResponse.json(
+      { error: "„Senest afsluttet“ skal ligge efter „Tidligst start“." },
+      { status: 400 }
+    );
+  }
+
+  if (body.terms_accepted !== "true") {
+    return NextResponse.json(
+      { error: "Du skal acceptere vilkår & betingelser." },
+      { status: 400 }
+    );
+  }
+
+  let companyName: string | null = null;
+  let cvr: string | null = null;
+  if (values.customer_type === "erhverv") {
+    const companyNameRaw = body.company_name;
+    const cvrRaw = body.cvr;
+    if (typeof companyNameRaw !== "string" || !companyNameRaw.trim()) {
+      return NextResponse.json(
+        { error: "Udfyld venligst virksomhedsnavn." },
+        { status: 400 }
+      );
+    }
+    if (typeof cvrRaw !== "string" || !/^\d{8}$/.test(cvrRaw.trim())) {
+      return NextResponse.json(
+        { error: "CVR skal bestå af 8 cifre." },
+        { status: 400 }
+      );
+    }
+    companyName = companyNameRaw.trim().slice(0, 200);
+    cvr = cvrRaw.trim();
+  }
+
   const comment =
     typeof body.comment === "string" && body.comment.trim()
       ? body.comment.trim().slice(0, 2000)
       : null;
+
+  const packageName =
+    packages.find((p) => p.id === values.service)?.name ?? values.service;
 
   // Gem i Supabase (service role — tabellen har RLS uden anon-adgang)
   try {
@@ -52,9 +101,18 @@ export async function POST(request: Request) {
       phone: values.phone,
       email: values.email,
       address: values.address,
+      postal_code: values.postal_code,
+      city: values.city,
+      customer_type: values.customer_type,
+      company_name: companyName,
+      cvr,
       car_size: values.car_size,
-      service: values.service,
+      service: packageName,
+      preferred_date: values.preferred_date,
+      earliest_start: values.earliest_start,
+      latest_end: values.latest_end,
       comment,
+      terms_accepted: true,
     });
     if (dbError) throw dbError;
   } catch (error) {
@@ -79,9 +137,18 @@ export async function POST(request: Request) {
         ["Navn", values.name],
         ["Telefon", values.phone],
         ["E-mail", values.email],
-        ["Adresse", values.address],
+        ["Adresse", `${values.address}, ${values.postal_code} ${values.city}`],
+        ["Kundetype", values.customer_type === "erhverv" ? "Erhverv" : "Privat"],
+        ...(values.customer_type === "erhverv"
+          ? ([
+              ["Virksomhed", companyName ?? "—"],
+              ["CVR", cvr ?? "—"],
+            ] as [string, string][])
+          : []),
         ["Bilstørrelse", values.car_size],
-        ["Ønsket ydelse", values.service],
+        ["Ønsket pakke", packageName],
+        ["Ønsket dato", values.preferred_date],
+        ["Tidsvindue", `${values.earliest_start} – ${values.latest_end}`],
         ["Kommentar", comment ?? "—"],
       ];
 
@@ -89,7 +156,7 @@ export async function POST(request: Request) {
         from,
         to,
         replyTo: values.email,
-        subject: `Ny booking: ${values.service} – ${values.name}`,
+        subject: `Ny booking: ${packageName} – ${values.name}`,
         html: `
           <h2>Ny booking-forespørgsel</h2>
           <table cellpadding="6" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
