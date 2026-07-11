@@ -10,6 +10,7 @@ import {
 } from "@/lib/supabase";
 import { login, logout } from "./actions";
 import StatusSelect from "./StatusSelect";
+import DeleteButton from "./DeleteButton";
 
 export const metadata: Metadata = {
   title: "Admin",
@@ -178,7 +179,10 @@ export default async function AdminPage({
                     </span>
                   </p>
                 </div>
-                <StatusSelect id={booking.id} status={booking.status} />
+                <div className="flex items-center gap-2">
+                  <StatusSelect id={booking.id} status={booking.status} />
+                  <DeleteButton id={booking.id} name={booking.name} />
+                </div>
               </div>
 
               <dl className="mt-5 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2 lg:grid-cols-3">

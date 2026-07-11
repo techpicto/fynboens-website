@@ -42,3 +42,30 @@ export async function updateBookingStatus(id: string, status: string) {
 
   revalidatePath("/admin");
 }
+
+export async function deleteBooking(
+  id: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  if (!(await isLoggedIn())) {
+    return { ok: false, error: "Ikke logget ind" };
+  }
+
+  const supabase = getSupabaseAdmin();
+  const { error } = await supabase.from("bookings").delete().eq("id", id);
+
+  if (error) {
+    console.error("Sletning fejlede:", error);
+    // 42501 = manglende GRANT DELETE — migration 0004 er ikke kørt endnu
+    if (error.code === "42501") {
+      return {
+        ok: false,
+        error:
+          "Databasen mangler slette-rettighed. Kør migration 0004_grant_delete_service_role.sql i Supabase.",
+      };
+    }
+    return { ok: false, error: "Kunne ikke slette forespørgslen. Prøv igen." };
+  }
+
+  revalidatePath("/admin");
+  return { ok: true };
+}
